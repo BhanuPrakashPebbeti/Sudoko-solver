@@ -171,6 +171,14 @@ def find_empty(bo):
 
     return None
 
+def solve_state(game_grid):
+    solve_state=False
+    for y in range(9):
+        for x in range(9):
+            if game_grid[y][x] != 0:
+                solve_state = True
+    return solve_state
+	
 def message_to_screen(q,size,colour,x,y):
     message = pygame.font.Font('freesansbold.ttf',size)
     messages = message.render(q,True,colour)
@@ -209,7 +217,8 @@ while running:
             if event.key in game.num:
                 game.input(event.key)
             elif event.key == pygame.K_RETURN:
-                solve(game_grid)
+                if solve_state(game_grid):
+                    solve(game_grid)
             elif event.key == pygame.K_BACKSPACE:
                 reset()
             elif event.key == pygame.K_RIGHT:
