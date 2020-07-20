@@ -207,6 +207,7 @@ def frame():
 
 game = block()
 running = True
+reset_state = True
 while running:
     screen.fill((dblack))
     for event in pygame.event.get():
@@ -215,12 +216,15 @@ while running:
             pygame.quit()
         elif event.type == pygame.KEYDOWN:
             if event.key in game.num:
-                game.input(event.key)
+                if reset_state:
+                    game.input(event.key)
             elif event.key == pygame.K_RETURN:
                 if solve_state(game_grid):
                     solve(game_grid)
+                    reset_state = False
             elif event.key == pygame.K_BACKSPACE:
                 reset()
+                reset_state = True
             elif event.key == pygame.K_RIGHT:
                 game.move_right(grid)
             elif event.key == pygame.K_LEFT:
