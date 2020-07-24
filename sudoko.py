@@ -8,7 +8,7 @@ dblack=(0,0,0)
 green = (51,255,51)
 bg1 = (153, 0, 76)
 bg2 = (255,51,51)
-ic = (178,255,102)
+ic = (125,229,0)
 solve = (51,255,51)
 reset = (255,255,51)
 
@@ -59,7 +59,9 @@ class block():
         return grid
 
     def erase(self,grid):
-        grid[self.y][self.x] = 0
+        for i in range(9):
+            for j in range(9):
+                grid[i][j] = 0
         return grid
 
     def move_left(self,grid):
@@ -88,6 +90,19 @@ class block():
         if result:
             self.erase(grid)
             self.y += 1
+        return grid
+    
+    def pointer_mouse(self,grid,pos):
+        (x ,y) = pos
+        x = x-25
+        y = y-60
+        x1 = x//40
+        y1 = y//40
+        result = (((x1<9) and (x1>-1)) and ((y1<9) and (y1>-1)))
+        if result:
+            self.erase(grid)
+            self.x = x1
+            self.y = y1
         return grid
 
     def input(self,key):
@@ -204,6 +219,7 @@ def frame():
     message_to_screen("-Press 'Enter' to solve",15,dblack,25,425)
     message_to_screen("-Press 'Backspace' to reset",15,dblack,25,445)
     message_to_screen("-Press '0' to reset particular cell",15,dblack,25,465)
+    message_to_screen("(OR) Press another number to overwrite the number ",15,dblack,25,485)
 
 game = block()
 running = True
@@ -214,6 +230,9 @@ while running:
         if event.type == pygame.QUIT:
             running = False
             pygame.quit()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            pos = pygame.mouse.get_pos()
+            game.pointer_mouse(grid, pos)
         elif event.type == pygame.KEYDOWN:
             if event.key in game.num:
                 if reset_state:
