@@ -1,6 +1,6 @@
 # Sudoko-solver
-#Simple solver application made using pygame module in python.
-#Simple controls :
+*Simple solver application made using pygame module in python.  *
+## Simple controls :
 *-use arrow keys to move the pointer on the grid.  
 -use mouse click to change the pointer on the grid.  
 -press the number-keys to enter particular number into particular cell.  
