@@ -1,5 +1,5 @@
 # Sudoko-solver
-*Simple solver application made using pygame module in python.  *
+Simple solver application made using pygame module in python.  
 ## Simple controls :
 *-use arrow keys to move the pointer on the grid.  
 -use mouse click to change the pointer on the grid.  
